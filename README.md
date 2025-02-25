@@ -36,8 +36,13 @@ Maintenance
 ## Formating and linting
 
 Some `Makefile` targets for basic formatters and linters are included along
-with GitHub Actions pre-submits. Versioning of these tools is done via the
-`requirements.txt` and `packages.json`. This is so that the versions can be
+with GitHub Actions pre-submits. Where possible, pre-submits use `Makefile`
+targets and those targets execute with the same settings as they do when run
+locally. This is to give a consistent experience when attempting to reproduce
+pre-submit errors.
+
+Versioning of formatting and linting tools is done via the `requirements.txt`
+and `packages.json` where possible. This is so that the versions can be
 maintained and updated via `dependabot`-like tooling.
 
 Required runtimes:
@@ -49,6 +54,9 @@ The following tools need to be installed:
 
 - [`actionlint`]: For linting GitHub Actions workflows.
 - [`shellcheck`]: For linting shell code in GitHub Actions workflows.
+- [`jq`]: For parsing output of some linters.
+- [`git`]: For repository management.
+- `bash`, `grep`, `awk`, `rm`: Standard Unix tools.
 
 The following tools are installed locally:
 
@@ -109,6 +117,12 @@ git fetch repo-template main
 git merge --no-edit --signoff --squash --allow-unrelated-histories repo-template/main
 ```
 
+## Recommended repository settings
+
+<!-- TODO: add recommended repo settings -->
+
+> TODO: add recommended repo settings
+
 ## Language-specific templates
 
 A number of language specific templates based on this template are also available:
@@ -125,6 +139,8 @@ See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for contributor documentation.
 [`Node.js`]: https://nodejs.org/
 [`Python`]: https://www.python.org/
 [`actionlint`]: https://github.com/rhysd/actionlint
+[`git`]: https://git-scm.com/
+[`jq`]: https://jqlang.org/
 [`markdownlint`]: https://github.com/DavidAnson/markdownlint
 [`prettier`]: https://prettier.io/
 [`shellcheck`]: https://www.shellcheck.net/
