@@ -41,18 +41,18 @@ Required runtimes:
 
 The following tools need to be installed:
 
-- [`mbrukman/autogen`]: For adding license headers.
 - [`git`]: For repository management.
 - `awk`, `bash`, `grep`, `head`, `rm`, `sha256sum`: Standard Unix tools.
 
 The following tools are automatically installed locally to the project and
 don't need to be pre-installed:
 
-- [`actionlint`]: For linting GitHub Actions workflows.
-- [`jq`]: For parsing output of some linters.
+- [`actionlint`]: For linting GitHub Actions workflows (installed by Aqua in `.aqua`).
+- [`jq`]: For parsing output of some linters (installed by Aqua in `.aqua`).
 - [`markdownlint`]: For linting markdown (installed in local `node_modules`).
+- [`mbrukman/autogen`]: For adding license headers (vendored in `third_party`).
 - [`prettier`]: For formatting markdown and yaml (installed in local `node_modules`).
-- [`shellcheck`]: For linting shell code in GitHub Actions workflows.
+- [`shellcheck`]: For linting shell code in GitHub Actions workflows (installed by Aqua in `.aqua`).
 - [`textlint`]: For spelling checks (installed in local `node_modules`).
 - [`yamllint`]: For linting YAML files (installed in local Python virtualenv `.venv`).
 - [`zizmor`]: For linting GitHub Actions workflows (installed in local Python virtualenv `.venv`).
