@@ -1,4 +1,4 @@
-# Copyright 2024 Ian Lewis
+# copyright 2024 ian lewis
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ AQUA_REPO ?= github.com/aquaproj/aqua
 AQUA_CHECKSUM.Linux.x86_64 = 6908509aa0c985ea60ed4bfdc69a69f43059a6b539fb16111387e1a7a8d87a9f
 AQUA_CHECKSUM ?= $(AQUA_CHECKSUM.$(uname_s).$(uname_m))
 AQUA_URL = https://$(AQUA_REPO)/releases/download/v$(AQUA_VERSION)/aqua_$(kernel)_$(arch).tar.gz
-AQUA_ROOT_DIR = .aqua
+AQUA_ROOT_DIR = $(REPO_ROOT)/.aqua
 
 # The help command prints targets in groups. Help documentation in the Makefile
 # uses comments with double hash marks (##). Documentation is printed by the
@@ -71,20 +71,29 @@ help: ## Print all Makefile targets (this message).
 				}'
 
 package-lock.json: package.json
-	@npm install
-	@npm audit signatures
+	@set -euo pipefail; \
+		npm install; \
+		npm audit signatures
 
 node_modules/.installed: package-lock.json
-	@npm clean-install
-	@npm audit signatures
-	@touch node_modules/.installed
+	@set -euo pipefail; \
+		npm clean-install; \
+		npm audit signatures; \
+		touch node_modules/.installed
 
-.venv/bin/activate:
-	@python -m venv .venv
+.venv/.bootstrap/bin/activate:
+	@python -m venv .venv/.bootstrap
 
-.venv/.installed: requirements.txt .venv/bin/activate
-	@./.venv/bin/pip install -r $< --require-hashes
-	@touch $@
+.venv/.bootstrap/.installed: requirements.txt .venv/bin/activate
+	@set -euo pipefail; \
+		./.venv/bin/pip install -r $< --require-hashes; \
+		touch $@
+
+.venv/.installed: .venv/.bootstrap
+	@set -euo pipefail; \
+		mkdir -p .venv/.uv; \
+		./.venv/.bootstrap/bin/uv pip install .; \
+		touch $@
 
 .bin/aqua-$(AQUA_VERSION)/aqua:
 	@set -euo pipefail; \
@@ -95,8 +104,9 @@ node_modules/.installed: package-lock.json
 		tar -x -C .bin/aqua-$(AQUA_VERSION) -f "$${tempfile}"
 
 $(AQUA_ROOT_DIR)/.installed: aqua.yaml .bin/aqua-$(AQUA_VERSION)/aqua
-	@AQUA_ROOT_DIR="$(AQUA_ROOT_DIR)" ./.bin/aqua-$(AQUA_VERSION)/aqua --config aqua.yaml install
-	@touch $@
+	@set -euo pipefail; \
+		export AQUA_ROOT_DIR="$(AQUA_ROOT_DIR)" ./.bin/aqua-$(AQUA_VERSION)/aqua --config aqua.yaml install; \
+		touch $@
 
 ## Tools
 #####################################################################
@@ -197,7 +207,7 @@ actionlint: $(AQUA_ROOT_DIR)/.installed ## Runs the actionlint linter.
 				| while IFS='' read -r f; do [ -f "$${f}" ] && echo "$${f}" || true; done \
 		); \
 		PATH="$(REPO_ROOT)/.bin/aqua-$(AQUA_VERSION):$(AQUA_ROOT_DIR)/bin:$${PATH}"; \
-		AQUA_ROOT_DIR="$(AQUA_ROOT_DIR)"; \
+		export AQUA_ROOT_DIR="$(AQUA_ROOT_DIR)"; \
 		if [ "$(OUTPUT_FORMAT)" == "github" ]; then \
 			actionlint -format '{{range $$err := .}}::error file={{$$err.Filepath}},line={{$$err.Line}},col={{$$err.Column}}::{{$$err.Message}}%0A```%0A{{replace $$err.Snippet "\\n" "%0A"}}%0A```\n{{end}}' -ignore 'SC2016:' $${files}; \
 		else \
@@ -215,10 +225,16 @@ zizmor: .venv/.installed ## Runs the zizmor linter.
 				'.github/workflows/*.yaml' \
 				| while IFS='' read -r f; do [ -f "$${f}" ] && echo "$${f}" || true; done \
 		); \
+		export UV_TOOL_BIN_DIR=.venv/.uv/bin; \
+		export UV_PYTHON_BIN_DIR=.venv/.uv/bin; \
+		export UV_PYTHON_INSTALL_DIR=.venv/.uv/python; \
+		export UV_TOOL_DIR=.venv/.uv/tools; \
+		export UV_CACHE_DIR=.venv/.uv/cache/uv; \
+		export UV_PYTHON_CACHE_DIR=.venv/.uv/cache/python; \
 		if [ "$(OUTPUT_FORMAT)" == "github" ]; then \
 			.venv/bin/zizmor --quiet --pedantic --format sarif $${files} > zizmor.sarif.json || true; \
 		fi; \
-		.venv/bin/zizmor --quiet --pedantic --format plain $${files}
+		.venv/bin/zizmor --version
 
 .PHONY: markdownlint
 markdownlint: node_modules/.installed $(AQUA_ROOT_DIR)/.installed ## Runs the markdownlint linter.
@@ -234,7 +250,7 @@ markdownlint: node_modules/.installed $(AQUA_ROOT_DIR)/.installed ## Runs the ma
 				| while IFS='' read -r f; do [ -f "$${f}" ] && echo "$${f}" || true; done \
 		); \
 		PATH="$(REPO_ROOT)/.bin/aqua-$(AQUA_VERSION):$(AQUA_ROOT_DIR)/bin:$${PATH}"; \
-		AQUA_ROOT_DIR="$(AQUA_ROOT_DIR)"; \
+		export AQUA_ROOT_DIR="$(AQUA_ROOT_DIR)"; \
 		if [ "$(OUTPUT_FORMAT)" == "github" ]; then \
 			exit_code=0; \
 			while IFS="" read -r p && [ -n "$$p" ]; do \
@@ -318,7 +334,7 @@ yamllint: .venv/.installed ## Runs the yamllint linter.
 		if [ "$(OUTPUT_FORMAT)" == "github" ]; then \
 			extraargs="-f github"; \
 		fi; \
-		.venv/bin/yamllint --strict -c .yamllint.yaml $${extraargs} $${files}
+		.venv/bin/uvx --env-file yamllint --strict -c .yamllint.yaml $${extraargs} $${files}
 
 ## Maintenance
 #####################################################################
