@@ -33,6 +33,11 @@
   // Group various ecosystem updates. Security updates are always separate.
   packageRules: [
     {
+      matchUpdateTypes: ["minor", "patch"],
+      groupName: "aqua",
+      matchFileNames: ["aqua.yaml", "aqua-checksums.yaml"],
+    },
+    {
       matchManagers: ["github-actions"],
       matchUpdateTypes: ["minor", "patch"],
       groupName: "github-actions",
