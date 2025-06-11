@@ -38,6 +38,11 @@
       matchFileNames: ["aqua.yaml", "aqua-checksums.yaml"],
     },
     {
+      matchUpdateTypes: ["minor", "patch"],
+      groupName: "makefile",
+      matchFileNames: ["Makefile"],
+    },
+    {
       matchManagers: ["github-actions"],
       matchUpdateTypes: ["minor", "patch"],
       groupName: "github-actions",
