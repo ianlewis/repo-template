@@ -220,8 +220,8 @@ In general, the following prefixes are supported:
 10. `revert`: reverts a previous change
 11. `test`: adds missing tests or corrects existing tests
 
-[`good first issue`]: ./labels/good%20first%20issue
-[`help wanted`]: ./labels/help%20wanted
+[`good first issue`]: ../../labels/good%20first%20issue
+[`help wanted`]: ../../labels/help%20wanted
 [Security Policy]: SECURITY.md
 [Code of Conduct]: CODE_OF_CONDUCT.md
 [Developer Certificate of Origin]: https://en.wikipedia.org/wiki/Developer_Certificate_of_Origin
