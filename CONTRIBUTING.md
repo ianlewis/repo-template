@@ -2,19 +2,19 @@
 
 This doc describes how to contribute to this repository.
 
-First, We'd love to accept your patches and contributions to my projects!
+First, thank you for contributing! We're happy to accept your patches and contributions!
 
 ## How can I help?
 
-There are many areas repositories that need help. These are managed in GitHub
+There are many areas that need help. These are managed in GitHub
 issues. Please let us know if you are willing to work on the issue and how you
 can contribute.
 
 - For new developers and contributors, please see issues labeled
-  `good first issue`. These issues should require minimal background knowledge
-  to contribute.
+  [`good first issue`]. These issues should require minimal
+  background knowledge to contribute.
 - For slightly more involved changes that may require some background knowledge,
-  please see issues labeled `help wanted`
+  please see issues labeled [`help wanted`]
 - For experienced developers, any of the open issues are open to contribution.
 
 If you don't find an existing issue for your contribution feel free to
@@ -77,50 +77,17 @@ development.
 
 #### The Makefile
 
-Most of my repositories make heavy use of `make` during development. This helps
-with automation of tasks locally on your machine. Type `make` to see a full list
-of `Makefile` targets.
+This repository makes heavy use of `make` for executing commands during development. This helps
+with automation of tasks locally on your machine. These commands are also used by GitHub Actions
+for continuous integration. Type `make` to see a full list of `Makefile` targets.
 
 Here is an example from the
 [`repo-template`](https://github.com/ianlewis/repo-template) repository.
 
-```shell
-$ make
-repo-template Makefile
-Usage: make [COMMAND]
-
-  help                 Shows all targets and help from the Makefile (this message).
-Tools
-  license-headers      Update license headers.
-Formatting
-  format               Format all files
-  md-format            Format Markdown files.
-  yaml-format          Format YAML files.
-Linting
-  lint                 Run all linters.
-  actionlint           Runs the actionlint linter.
-  zizmor               Runs the zizmor linter.
-  markdownlint         Runs the markdownlint linter.
-  yamllint             Runs the yamllint linter.
-Maintenance
-  clean                Delete temporary files.
-```
-
 #### Linters
 
-Most projects use the following linters depending on the programming languages
-used.
-
-- [`actionlint`](https://github.com/rhysd/actionlint): For GitHub actions
-  workflows.
-- [`eslint`](https://eslint.org/): For JavaScript and TypeScript.
-- [`golangci-lint`](https://github.com/golangci/golangci-lint): For Go.
-- [`markdownlint`](https://github.com/DavidAnson/markdownlint): For markdown.
-- [`yamllint`](https://www.yamllint.com/): For YAML (GitHub Actions workflows,
-  configuration files etc.)
-
-You do not necessarily need to have all installed but you will need to install
-those that you want to run them locally.
+Linters are used to maintain code quality and check for common errors.
+Linters are installed locally to the project and do not need to be installed separately.
 
 You can run all linters with the `lint` make target:
 
@@ -131,26 +98,8 @@ make lint
 or individually by name:
 
 ```shell
+# Run markdownlint to lint markdown files.
 make markdownlint
-```
-
-#### Running tests
-
-Where unit tests exist, you can run all unit tests using the `unit-test` make
-target:
-
-```shell
-make unit-test
-```
-
-You can run unit tests for individual languages with the appropriate `make`
-target. These may vary a bit depending on the repository and code layout.
-Typing `make` or `make help` will show the full list of targets.
-
-For example, this runs Go unit tests.
-
-```shell
-make go-test
 ```
 
 #### Commit and push your code
@@ -204,15 +153,10 @@ Once you have finished you can mark the PR as "Ready for review".
 
 #### Pre-submits
 
-PRs perform number of [GitHub status checks] which run linters and tests. These
+PRs perform number of [GitHub status checks] which run linters, tests, etc. These
 tests must all pass before a PR will be accepted. These tests are located in
 the [`.github/workflows`](.github/workflows) directory and begin with the
 prefix `pre-sumbit`.
-
-Unit tests are run as pre-submit tests in the
-[`pre-submit.units.yml`](.github/workflows/pre-submit.units.yml) file. To run
-these tests locally see the instructions in the [`Running
-Tests`](#running-tests) section.
 
 #### Code reviews
 
@@ -230,15 +174,21 @@ This section contains info on general conventions I use in my repositories.
 
 ### Code style and formatting
 
-Most code, scripts, and documentation should be auto-formatted using a
-formatting tool.
+Most code, scripts, and documentation should be auto-formatted using a formatting tool.
+Formatting tools are installed locally to the project and do not need to be installed separately.
 
-1. Go code should be is formatted using [`gofumpt`].
-2. TypeScript code should be [`prettier`].
-3. Python code should be formatted with [`black`].
-4. Rust code should be formatted with [`rustfmt`].
-5. YAML should be formatted using [`prettier`].
-6. Markdown should be formatted using [`prettier`].
+You can format all files with the `format` make target:
+
+```shell
+make format
+```
+
+You can also formatting for each file type individually:
+
+```shell
+# Format markdown files.
+make md-format
+```
 
 ### Semantic Versioning
 
@@ -270,6 +220,8 @@ In general, the following prefixes are supported:
 10. `revert`: reverts a previous change
 11. `test`: adds missing tests or corrects existing tests
 
+[`good first issue`]: ./labels/good%20first%20issue
+[`help wanted`]: ./labels/help%20wanted
 [Security Policy]: SECURITY.md
 [Code of Conduct]: CODE_OF_CONDUCT.md
 [Developer Certificate of Origin]: https://en.wikipedia.org/wiki/Developer_Certificate_of_Origin
@@ -279,8 +231,4 @@ In general, the following prefixes are supported:
 [About pull request reviews]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews
 [Semantic Versioning]: https://semver.org/
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
-[`gofumpt`]: https://github.com/mvdan/gofumpt
-[`prettier`]: https://prettier.io/
-[`black`]: https://github.com/psf/black
-[`rustfmt`]: https://github.com/rust-lang/rustfmt
 [GitHub status checks]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks
