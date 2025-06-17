@@ -172,7 +172,6 @@ is recommended to ensure the repository is set up correctly.
 
 Files that should be updated include a TODO comment to indicate what changes
 should made. You can run `make todos` to list all TODOs in the repository.
-ittps://docs.github.com/en/code-security/security-advisories-and-vulnerability-reporting-on-github/private-vulnerability-reporting
 
 ```shell
 $ make todos
