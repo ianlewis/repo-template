@@ -2,7 +2,8 @@
 
 This doc describes how to contribute to this repository.
 
-First, thank you for contributing! We're happy to accept your patches and contributions!
+First, thank you for contributing! We're happy to accept your patches and
+contributions!
 
 ## How can I help?
 
@@ -77,21 +78,20 @@ development.
 
 #### The Makefile
 
-This repository makes heavy use of `make` for executing commands during development. This helps
-with automation of tasks locally on your machine. These commands are also used by GitHub Actions
-for continuous integration. Type `make` to see a full list of `Makefile` targets.
-
-Here is an example from the
-[`repo-template`](https://github.com/ianlewis/repo-template) repository.
+This repository makes heavy use of `make` for executing commands during
+development. This helps with automation of tasks locally on your machine. These
+commands are also used by GitHub Actions for continuous integration. Type `make`
+to see a full list of `Makefile` targets.
 
 #### Linters
 
-Linters are used to maintain code quality and check for common errors.
-Linters are installed locally to the project and do not need to be installed separately.
+Linters are used to maintain code quality and check for common errors. Linters
+are installed locally to the project and do not need to be installed separately.
 
 You can run all linters with the `lint` make target:
 
 ```shell
+# Run all linters.
 make lint
 ```
 
@@ -128,14 +128,16 @@ git push origin my-new-feature
 
 ### Pull requests
 
-Once you have your code pushed to your fork you can now created a new
-[pull request] (PR). This allows the project maintainers to review your submission.
+Once you have your code pushed to your fork you can now created a new [pull
+request] (PR). This allows the project maintainers to review your submission.
 
 #### Create a PR
 
-You can
-[create a new pull request via the GitHub UI](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=webui)
-or [via the `gh` CLI tool](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=cli). Create the PR as a
+You can [create a new pull request via the GitHub
+UI](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=webui)
+or [via the `gh` CLI
+tool](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=cli).
+Create the PR as a
 [draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests#draft-pull-requests)
 to start.
 
@@ -151,12 +153,15 @@ checklist items as complete before finalizing your PR.
 
 Once you have finished you can mark the PR as "Ready for review".
 
-#### Pre-submits
+#### Status checks
 
-PRs perform number of [GitHub status checks] which run linters, tests, etc. These
-tests must all pass before a PR will be accepted. These tests are located in
-the [`.github/workflows`](.github/workflows) directory and begin with the
+PRs perform number of [GitHub status checks] which run linters, tests, etc.
+These tests must all pass before a PR will be accepted. These tests are located
+in the [`.github/workflows`](.github/workflows) directory and begin with the
 prefix `pre-sumbit`.
+
+Most pull request status checks are run as pre-submit tests in the
+[`pre-submit.units.yml`] file.
 
 #### Code reviews
 
@@ -174,16 +179,18 @@ This section contains info on general conventions I use in my repositories.
 
 ### Code style and formatting
 
-Most code, scripts, and documentation should be auto-formatted using a formatting tool.
-Formatting tools are installed locally to the project and do not need to be installed separately.
+Most code, scripts, and documentation should be auto-formatted using a
+formatting tool. Formatting tools are installed locally to the project and do
+not need to be installed separately.
 
-You can format all files with the `format` make target:
+Code formatting for all files can be run with the `format` make target:
 
 ```shell
+# Format all project files.
 make format
 ```
 
-You can also formatting for each file type individually:
+Individual formatting tools can also be run by name:
 
 ```shell
 # Format markdown files.
@@ -211,7 +218,8 @@ In general, the following prefixes are supported:
 1. `fix`: patches a bug
 2. `feat`: introduces a new feature
 3. `docs`: a change in the documentation.
-4. `chore`: a change that performs a task but doesn't change functionality, such as updating dependencies.
+4. `chore`: a change that performs a task but doesn't change functionality, such
+   as updating dependencies.
 5. `refactor`: a code change that improves code quality
 6. `style`: coding style or format changes
 7. `build`: changes that affect the build system
@@ -231,4 +239,5 @@ In general, the following prefixes are supported:
 [About pull request reviews]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews
 [Semantic Versioning]: https://semver.org/
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
+[`pre-submit.units.yml`]: .github/workflows/pre-submit.units.yml
 [GitHub status checks]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks
