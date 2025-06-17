@@ -206,7 +206,7 @@ The following checks should be marked as required:
 - [ ] `markdownlint`
 - [ ] `renovate-config-validator`
 - [ ] `textlint`
-- [ ] `todos`
+- [ ] `fixme`
 - [ ] `yamllint`
 - [ ] `zizmor`
 
