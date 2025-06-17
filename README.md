@@ -168,7 +168,7 @@ standards](https://opensource.guide/).
 When creating a new repository from this template, the following checklist
 is recommended to ensure the repository is set up correctly.
 
-## Update configuration files
+### Update configuration files
 
 Files that should be updated include a TODO comment to indicate what changes
 should made. You can run `make todos` to list all TODOs in the repository.
