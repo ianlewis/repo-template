@@ -89,21 +89,25 @@ $ make
 repo-template Makefile
 Usage: make [COMMAND]
 
-  help                 Shows all targets and help from the Makefile (this message).
+  help                      Print all Makefile targets (this message).
 Tools
-  license-headers      Update license headers.
+  license-headers           Update license headers.
 Formatting
-  format               Format all files
-  md-format            Format Markdown files.
-  yaml-format          Format YAML files.
+  format                    Format all files
+  json-format               Format JSON files.
+  md-format                 Format Markdown files.
+  yaml-format               Format YAML files.
 Linting
-  lint                 Run all linters.
-  actionlint           Runs the actionlint linter.
-  zizmor               Runs the zizmor linter.
-  markdownlint         Runs the markdownlint linter.
-  yamllint             Runs the yamllint linter.
+  lint                      Run all linters.
+  actionlint                Runs the actionlint linter.
+  zizmor                    Runs the zizmor linter.
+  markdownlint              Runs the markdownlint linter.
+  renovate-config-validator Validate Renovate configuration.
+  textlint                  Runs the textlint linter.
+  todos                     Check for outstanding TODOs.
+  yamllint                  Runs the yamllint linter.
 Maintenance
-  clean                Delete temporary files.
+  clean                     Delete temporary files.
 ```
 
 #### Linters
@@ -125,32 +129,15 @@ those that you want to run them locally.
 You can run all linters with the `lint` make target:
 
 ```shell
+# Run all linters.
 make lint
 ```
 
 or individually by name:
 
 ```shell
+# Run the markdownlint linter.
 make markdownlint
-```
-
-#### Running tests
-
-Where unit tests exist, you can run all unit tests using the `unit-test` make
-target:
-
-```shell
-make unit-test
-```
-
-You can run unit tests for individual languages with the appropriate `make`
-target. These may vary a bit depending on the repository and code layout.
-Typing `make` or `make help` will show the full list of targets.
-
-For example, this runs Go unit tests.
-
-```shell
-make go-test
 ```
 
 #### Commit and push your code
@@ -179,14 +166,16 @@ git push origin my-new-feature
 
 ### Pull requests
 
-Once you have your code pushed to your fork you can now created a new
-[pull request] (PR). This allows the project maintainers to review your submission.
+Once you have your code pushed to your fork you can now created a new [pull
+request] (PR). This allows the project maintainers to review your submission.
 
 #### Create a PR
 
-You can
-[create a new pull request via the GitHub UI](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=webui)
-or [via the `gh` CLI tool](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=cli). Create the PR as a
+You can [create a new pull request via the GitHub
+UI](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=webui)
+or [via the `gh` CLI
+tool](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request?tool=cli).
+Create the PR as a
 [draft](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests#draft-pull-requests)
 to start.
 
@@ -202,17 +191,15 @@ checklist items as complete before finalizing your PR.
 
 Once you have finished you can mark the PR as "Ready for review".
 
-#### Pre-submits
+#### Status checks
 
 PRs perform number of [GitHub status checks] which run linters and tests. These
-tests must all pass before a PR will be accepted. These tests are located in
-the [`.github/workflows`](.github/workflows) directory and begin with the
-prefix `pre-sumbit`.
+tests must all pass before a PR will be accepted. These tests are located in the
+[`.github/workflows`](.github/workflows) directory and begin with the prefix
+`pre-sumbit`.
 
-Unit tests are run as pre-submit tests in the
-[`pre-submit.units.yml`](.github/workflows/pre-submit.units.yml) file. To run
-these tests locally see the instructions in the [`Running
-Tests`](#running-tests) section.
+Most pull request status checks are run as pre-submit tests in the
+[`pre-submit.units.yml`] file.
 
 #### Code reviews
 
@@ -233,12 +220,19 @@ This section contains info on general conventions I use in my repositories.
 Most code, scripts, and documentation should be auto-formatted using a
 formatting tool.
 
-1. Go code should be is formatted using [`gofumpt`].
-2. TypeScript code should be [`prettier`].
-3. Python code should be formatted with [`black`].
-4. Rust code should be formatted with [`rustfmt`].
-5. YAML should be formatted using [`prettier`].
-6. Markdown should be formatted using [`prettier`].
+Code formatting for all files can be run with the `format` make target:
+
+```shell
+# Format all project files.
+make format
+```
+
+Individual formatting tools can also be run by name:
+
+```shell
+# Format markdown files.
+make md-format
+```
 
 ### Semantic Versioning
 
@@ -279,8 +273,5 @@ In general, the following prefixes are supported:
 [About pull request reviews]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/reviewing-changes-in-pull-requests/about-pull-request-reviews
 [Semantic Versioning]: https://semver.org/
 [Conventional Commits]: https://www.conventionalcommits.org/en/v1.0.0/
-[`gofumpt`]: https://github.com/mvdan/gofumpt
-[`prettier`]: https://prettier.io/
-[`black`]: https://github.com/psf/black
-[`rustfmt`]: https://github.com/rust-lang/rustfmt
+[`pre-submit.units.yml`]: .github/workflows/pre-submit.units.yml
 [GitHub status checks]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/collaborating-on-repositories-with-code-quality-features/about-status-checks
