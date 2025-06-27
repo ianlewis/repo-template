@@ -348,7 +348,6 @@ textlint: node_modules/.installed $(AQUA_ROOT_DIR)/.installed ## Runs the textli
 .PHONY: yamllint
 yamllint: .venv/.installed ## Runs the yamllint linter.
 	@set -euo pipefail;\
-		extraargs=""; \
 		files=$$( \
 			git ls-files --deduplicate \
 				'*.yml' \
