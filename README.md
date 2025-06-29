@@ -222,10 +222,15 @@ The following tools should be added to the required code scanning results.
 - [ ] `CodeQL`
 - [ ] `zizmor`
 
-#### Code security
+#### Advanced Security
 
 1. [ ] **Private vulnerability reporting:**
        Enable [private vulnerability reporting] as mentioned in [`SECURITY.md`].
+2. [ ] **Dependabot Alerts:**
+       Enable [dependabot alerts]. Renovate relies on dependabot alerts for its
+       [vulnerability
+       alerts](https://docs.renovatebot.com/configuration-options/#vulnerabilityalerts)
+       feature.
 
 ##### Code scanning
 
@@ -271,6 +276,7 @@ A number of language specific templates based on this template are also availabl
 PRs may be accepted to this template. See [`CONTRIBUTING.md`] for contributor
 documentation.
 
+[dependabot alerts]: https://docs.github.com/en/code-security/dependabot/dependabot-alerts/about-dependabot-alerts
 [private vulnerability reporting]: https://docs.github.com/en/code-security/security-advisories/working-with-repository-security-advisories/configuring-private-vulnerability-reporting-for-a-repository
 [`CONTRIBUTING.md`]: ./CONTRIBUTING.md
 [`SECURITY.md`]: ./SECURITY.md
