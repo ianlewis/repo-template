@@ -227,7 +227,7 @@ The following tools should be added to the required code scanning results.
 1. [ ] **Private vulnerability reporting:**
        Enable [private vulnerability reporting] as mentioned in [`SECURITY.md`].
 2. [ ] **Dependabot Alerts:**
-       Enable [dependabot alerts]. Renovate relies on dependabot alerts for its
+       Enable [Dependabot alerts]. Renovate relies on Dependabot alerts for its
        [vulnerability
        alerts](https://docs.renovatebot.com/configuration-options/#vulnerabilityalerts)
        feature.
