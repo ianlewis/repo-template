@@ -342,10 +342,8 @@ commitlint: node_modules/.installed ## Run commitlint linter.
 	commitlint_to=$(COMMITLINT_TO_REF); \
 	if [ "$${commitlint_from}" == "" ]; then \
 		# Try to get the default branch without hitting the remote server \
-		if git symbolic-ref refs/remotes/origin/HEAD >/dev/null 2>&1; then \
-			commitlint_from=$$(git symbolic-ref refs/remotes/origin/HEAD | sed 's|refs/remotes/origin/||'); \
-		elif git show-ref refs/remotes/origin/main >/dev/null 2>&1; then \
-			commitlint_from="main"; \
+		if git symbolic-ref --short refs/remotes/origin/HEAD >/dev/null 2>&1; then \
+			commitlint_from=$$(git symbolic-ref --short refs/remotes/origin/HEAD | sed 's|^origin/||'); \
 		elif git show-ref refs/remotes/origin/master >/dev/null 2>&1; then \
 			commitlint_from="master"; \
 		else \
