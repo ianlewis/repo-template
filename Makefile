@@ -357,9 +357,9 @@ commitlint: node_modules/.installed ## Run commitlint linter.
 		fi; \
 	fi; \
 	if [ "$${commitlint_to}" == "" ]; then \
-		# if head is on the commitlint_from branch, then we will lint the \
-		# last commit by default. \
-		current_branch=$$(git rev-parse --abbrev-ref HEAD); \
+		# If upstream of HEAD is on the commitlint_from branch, then we will \
+		# lint the last commit by default. \
+		current_branch=$$(git rev-parse --abbrev-ref @{u}); \
 		if [ "$${commitlint_from}" == "$${current_branch}" ]; then \
 			commitlint_from="HEAD~1"; \
 		fi; \
