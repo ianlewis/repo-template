@@ -91,6 +91,11 @@
       groupName: "python",
     },
     {
+      matchManagers: ["pep621"],
+      matchUpdateTypes: ["minor", "patch"],
+      groupName: "pep621",
+    },
+    {
       matchManagers: ["npm"],
       matchDepTypes: ["dependencies"],
       matchUpdateTypes: ["minor", "patch"],
