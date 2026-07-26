@@ -26,6 +26,8 @@
   prHourlyLimit: 0,
   prConcurrentLimit: 0,
 
+  foo: "bar",
+
   // Security alerts/updates.
   vulnerabilityAlerts: {
     enabled: true,
