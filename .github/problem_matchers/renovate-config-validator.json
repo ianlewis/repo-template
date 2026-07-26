@@ -1,0 +1,19 @@
+{
+  "problemMatcher": [
+    {
+      "owner": "renovate-config-validator",
+      "severity": "error",
+      "pattern": [
+        {
+          "regexp": "\"file\":\\s+\"(.+)\"",
+          "file": 1
+        },
+        {
+          "regexp": "\"message\":\\s+\"(.+)\"",
+          "message": 2,
+          "loop": true
+        }
+      ]
+    }
+  ]
+}

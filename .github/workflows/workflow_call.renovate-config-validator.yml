@@ -37,6 +37,9 @@ jobs:
         with:
           node-version-file: ".node-version"
 
+      - name: enable problem matcher
+        run: echo "::add-matcher::.github/problem_matchers/renovate-config-validator.json"
+
       - name: renovate-config-validator
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
