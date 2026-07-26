@@ -5,11 +5,11 @@
       "severity": "error",
       "pattern": [
         {
-          "regexp": "\"file\":\\s+\"(.+)\"",
+          "regexp": "^\\s*\"file\":\\s*\"(.+)\",?\\s*$",
           "file": 1
         },
         {
-          "regexp": "\"message\":\\s+\"(.+)\"",
+          "regexp": "^\\s*\"message\":\\s+\"(.+)\",?\\s*$",
           "message": 1,
           "loop": true
         }
