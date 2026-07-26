@@ -10,7 +10,7 @@
         },
         {
           "regexp": "\"message\":\\s+\"(.+)\"",
-          "message": 2,
+          "message": 1,
           "loop": true
         }
       ]
